@@ -2,7 +2,7 @@ DATA = '''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08 49 49 99 4
 
 class Matrix:
     def __init__(self, height, width):
-        self.data = []
+        self.data = [[0] * width] * height
         self.height = height
         self.width = width
         
@@ -11,26 +11,20 @@ class Matrix:
     
     def __setitem__(self, index, value):
         self.data[index] = value
-
         
+    def fill_with_list(self, nums_list):
+        for i in range(self.height):
+            start = i * self.width
+            end = (i + 1) * self.width
+            self[i] = nums_list[start:end]
 
-def translate_to_matrix(nums_list, size):
-    #определение размера матрицы
-    if type(size) is tuple:
-        height = size[0]
-        width = size[1]
-    else:
-        heigth = width = size
-    
-    #заполнение матрицы
-    matrix = []
-    for i in range(size):
-        start = i * 20
-        end = (i + 1) * 20
-        matrix.append(nums_list[start:end])
-    return matrix
+    def __str__(self):
+        res = ''
+        for i in range(self.height):
+            res += ' '.join([f'{str(num):<2}' for num in self[i]]) + '\n'
+        return res
         
-def get_data():
+def get_nums(data):
     #преобразование чисел (из-за чисел, начинающихся с 0)
     def get_correct_num(num):
         try:
@@ -38,14 +32,18 @@ def get_data():
         except:
             return int(num[1])
     
-    data_list = DATA.split(' ')
-    nums_list = [get_correct_num(num) for num in data_list]
-    #преобразованиев матрицу
-    matrix = translate_to_matrix(nums_list, 20)
+    data_list = data.split(' ')
+    return [get_correct_num(num) for num in data_list]
+    
     
     
 def main():
-    get_data()
+    nums_list = get_nums(DATA)
+    
+    matrix = Matrix(20, 20)
+    matrix.fill_with_list(nums_list)
+    print(matrix)
+    
     
 if __name__ == '__main__':
     main()
