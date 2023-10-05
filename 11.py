@@ -3,9 +3,16 @@ DATA = '''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08 49 49 99 4
 class Matrix:
     def __init__(self, height, width):
         self.data = [[0] * width] * height
-        self.height = height
-        self.width = width
-        
+        self.__height = height
+        self.__width = width
+    
+    def get_height(self):
+        return self.__height
+    
+    def get_width(self):
+        return self.__width
+    
+    
     def __getitem__(self, index):
         return self.data[index]
     
@@ -13,14 +20,14 @@ class Matrix:
         self.data[index] = value
         
     def fill_with_list(self, nums_list):
-        for i in range(self.height):
+        for i in range(self.__height):
             start = i * self.width
             end = (i + 1) * self.width
             self[i] = nums_list[start:end]
 
     def __str__(self):
         res = ''
-        for i in range(self.height):
+        for i in range(self.__height):
             res += ' '.join([f'{str(num):<2}' for num in self[i]]) + '\n'
         return res
         
@@ -47,3 +54,8 @@ def main():
     
 if __name__ == '__main__':
     main()
+# getters and setters
+# vertic mult
+# horizontal mult
+# main diagonal mult
+# side diagonal mult
