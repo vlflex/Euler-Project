@@ -49,6 +49,22 @@ class Matrix:
             for i in range(index_i, index_i + nums_count):
                 extracted_nums.append(self[i][j])
             return reduce(MULTIPLICATION, extracted_nums)
+        
+    def horizontal_mult(self, index_i, index_j, nums_count = 4):
+        if index_i < 0 or index_j < 0:
+            raise MatrixIndexException(self.__height, self.__width, 0)
+        elif index_i >= self.__height:
+            raise MatrixIndexException(self.__height, self.__width, 1)
+        elif index_j >= self.__width:
+            raise MatrixIndexException(self.__height, self.__width, 2)
+        elif index_j + nums_count > self.__width:
+            raise MatrixIndexException(self.__height, self.__width, 4)
+        else:
+            extracted_nums = []
+            i = index_i
+            for j in range(index_j, index_j + nums_count):
+                extracted_nums.append(self[i][j])
+            return reduce(MULTIPLICATION, extracted_nums)
     
     def __getitem__(self, index):
         return self.__data[index]
