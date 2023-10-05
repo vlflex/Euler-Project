@@ -12,10 +12,11 @@ class MatrixIndexException(Exception):
             return f"MatrixIndexException: index j out of range j > {self.__width}"
         elif self.__option == 3:
             return f"MatrixIndexException: index i + nums out of range"
+        
 
 class Matrix:
     def __init__(self, height, width):
-        self.data = [[0] * width] * height
+        self.__data = [[0] * width] * height
         self.__height = height
         self.__width = width
     
@@ -27,15 +28,15 @@ class Matrix:
     
     
     def __getitem__(self, index):
-        return self.data[index]
+        return self.__data[index]
     
     def __setitem__(self, index, value):
-        self.data[index] = value
+        self.__data[index] = value
         
     def fill_with_list(self, nums_list):
         for i in range(self.__height):
-            start = i * self.width
-            end = (i + 1) * self.width
+            start = i * self.__width
+            end = (i + 1) * self.__width
             self[i] = nums_list[start:end]
 
     def __str__(self):
@@ -67,7 +68,7 @@ def main():
     
 if __name__ == '__main__':
     main()
-# getters and setters
+    
 # vertic mult
 # horizontal mult
 # main diagonal mult
