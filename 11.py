@@ -20,6 +20,10 @@ class MatrixIndexException(Exception):
             return f"MatrixIndexException: index i + nums out of range"
         elif self.__option == 4:
             return f"MatrixIndexException: index j + nums out of range"
+        elif self.__option == 5:
+            return f"MatrixIndexException: index i - nums out of range"
+        elif self.__option == 6:
+            return f"MatrixIndexException: index j - nums out of range"
         
 
 class Matrix:
@@ -34,20 +38,24 @@ class Matrix:
     def get_width(self):
         return self.__width
     
-    def __check_exceptions(self, index_i, index_j, nums_count):
+    def __check_exceptions(self, index_i, index_j, nums_count, horizontal = False, vertic = False, main_diagonal = False, side_diagonal = False):
         if index_i < 0 or index_j < 0:
             raise MatrixIndexException(self.__height, self.__width, 0)
         elif index_i >= self.__height:
             raise MatrixIndexException(self.__height, self.__width, 1)
         elif index_j >= self.__width:
             raise MatrixIndexException(self.__height, self.__width, 2)
-        elif index_i + nums_count > self.__height:
+        elif (index_i + nums_count > self.__height) and ((vertic) or (main_diagonal)):
             raise MatrixIndexException(self.__height, self.__width, 3)
-        elif index_j + nums_count > self.__width:
+        elif (index_j + nums_count > self.__width) and ((horizontal) or (main_diagonal)):
             raise MatrixIndexException(self.__height, self.__width, 4)
+        elif (index_i - nums_count < -1) and (side_diagonal):
+            raise MatrixIndexException(self.__height, self.__width, 5)
+        elif (index_j - nums_count < -1) and (side_diagonal):
+            raise MatrixIndexException(self.__height, self.__width, 6)
 
     def vertic_mult(self, index_i, index_j, nums_count = 4):
-        self.__check_exceptions(index_i, index_j, nums_count)
+        self.__check_exceptions(index_i, index_j, nums_count, vertic=True)
 
         extracted_nums = []
         j = index_j
@@ -56,7 +64,7 @@ class Matrix:
         return reduce(MULTIPLICATION, extracted_nums)
         
     def horizontal_mult(self, index_i, index_j, nums_count = 4):
-        self.__check_exceptions(index_i, index_j, nums_count)
+        self.__check_exceptions(index_i, index_j, nums_count, horizontal=True)
         
         extracted_nums = []
         i = index_i
@@ -65,7 +73,7 @@ class Matrix:
         return reduce(MULTIPLICATION, extracted_nums)
     
     def main_diagonal_mult(self, index_i, index_j, nums_count = 4):
-        self.__check_exceptions(index_i, index_j, nums_count)
+        self.__check_exceptions(index_i, index_j, nums_count, main_diagonal=True)
         
         extracted_nums = []
         for k in range(nums_count):
@@ -75,7 +83,7 @@ class Matrix:
         return reduce(MULTIPLICATION, extracted_nums)
         
     def side_diagonal_mult(self, index_i, index_j, nums_count = 4):
-        self.__check_exceptions(index_i, index_j, nums_count)
+        self.__check_exceptions(index_i, index_j, nums_count, side_diagonal=True)
         
         extracted_nums = []
         for k in range(nums_count):
