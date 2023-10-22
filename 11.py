@@ -46,7 +46,6 @@ class Matrix:
         elif index_j + nums_count > self.__width:
             raise MatrixIndexException(self.__height, self.__width, 4)
 
-    
     def vertic_mult(self, index_i, index_j, nums_count = 4):
         self.__check_exceptions(index_i, index_j, nums_count)
 
@@ -66,6 +65,16 @@ class Matrix:
         return reduce(MULTIPLICATION, extracted_nums)
     
     def main_diagonal_mult(self, index_i, index_j, nums_count = 4):
+        self.__check_exceptions(index_i, index_j, nums_count)
+        
+        extracted_nums = []
+        for k in range(nums_count):
+            i = index_i + k
+            j = index_j + k
+            extracted_nums.append(self[i][j])
+        return reduce(MULTIPLICATION, extracted_nums)
+        
+    def side_diagonal_mult(self, index_i, index_j, nums_count = 4):
         self.__check_exceptions(index_i, index_j, nums_count)
         
         extracted_nums = []
@@ -114,19 +123,17 @@ def main():
     print(matrix)
     
     try:
-        mult = matrix.vertic_mult(0, 1, 2)
+        mult = matrix.main_diagonal_mult(18, 18, 2)
     
     except Exception as error:
         print(error)
         
     else:
-        print(mult)
-    
+        print(mult)    
     
 if __name__ == '__main__':
     main()
     
-# vertic mult
-# horizontal mult
-# main diagonal mult
+
 # side diagonal mult
+# исправить ошибку (если возникнет), которая связана с исключениями в side diagonal (index + nums, когда нужно index - nums)
