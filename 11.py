@@ -22,8 +22,6 @@ class MatrixIndexException(Exception):
             return f"MatrixIndexException: index j + nums out of range"
         elif self.__option == 5:
             return f"MatrixIndexException: index i - nums out of range"
-        elif self.__option == 6:
-            return f"MatrixIndexException: index j - nums out of range"
         
 
 class Matrix:
@@ -47,12 +45,10 @@ class Matrix:
             raise MatrixIndexException(self.__height, self.__width, 2)
         elif (index_i + nums_count > self.__height) and ((vertic) or (main_diagonal)):
             raise MatrixIndexException(self.__height, self.__width, 3)
-        elif (index_j + nums_count > self.__width) and ((horizontal) or (main_diagonal)):
+        elif (index_j + nums_count > self.__width) and ((horizontal) or (main_diagonal) or (side_diagonal)):
             raise MatrixIndexException(self.__height, self.__width, 4)
         elif (index_i - nums_count < -1) and (side_diagonal):
             raise MatrixIndexException(self.__height, self.__width, 5)
-        elif (index_j - nums_count < -1) and (side_diagonal):
-            raise MatrixIndexException(self.__height, self.__width, 6)
 
     def vertic_mult(self, index_i, index_j, nums_count = 4):
         self.__check_exceptions(index_i, index_j, nums_count, vertic=True)
@@ -87,7 +83,7 @@ class Matrix:
         
         extracted_nums = []
         for k in range(nums_count):
-            i = index_i + k
+            i = index_i - k
             j = index_j + k
             extracted_nums.append(self[i][j])
         return reduce(MULTIPLICATION, extracted_nums)
