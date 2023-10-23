@@ -117,27 +117,65 @@ def get_nums(data):
     data_list = data.split(' ')
     return [get_correct_num(num) for num in data_list]
     
-    
-    
 def main():
     nums_list = get_nums(DATA)
     
     matrix = Matrix(20, 20)
     matrix.fill_with_list(nums_list)
     print(matrix)
+    nums = 4
     
     try:
-        mult = matrix.main_diagonal_mult(18, 18, 2)
-    
+        #по горизонтали
+        horizontal_mults = []
+        for i in range(matrix.get_height()):
+            i_coor = [i] * (matrix.get_width() - nums + 1)
+            j_coor = list(range(matrix.get_width() - nums + 1))
+            coordinates = list(zip(i_coor, j_coor))
+            for coor in coordinates:
+                horizontal_mults.append(matrix.horizontal_mult(*coor))
+
+        #по вертикали
+        vertic_mults = []
+        for i in range(matrix.get_height() - nums + 1):
+            i_coor = [i] * (matrix.get_width())
+            j_coor = list(range(matrix.get_width()))
+            coordinates = list(zip(i_coor, j_coor))
+            for coor in coordinates:
+                vertic_mults.append(matrix.vertic_mult(*coor))
+        
+        #по главной диагонали
+        main_diagonal_mults = []
+        for i in range(matrix.get_height() - nums + 1):
+            i_coor = [i] * (matrix.get_width() - nums + 1)
+            j_coor = list(range(matrix.get_width() - nums + 1))
+            coordinates = list(zip(i_coor, j_coor))
+            for coor in coordinates:
+                main_diagonal_mults.append(matrix.main_diagonal_mult(*coor))
+                
+        #по побочной диагонали
+        side_diagonal_mults = []
+        for i in range(3, matrix.get_height() - nums + 1):
+            i_coor = [i] * (matrix.get_width() - nums + 1)
+            j_coor = list(range(matrix.get_width() - nums + 1))
+            coordinates = list(zip(i_coor, j_coor))
+            for coor in coordinates:
+                side_diagonal_mults.append(matrix.side_diagonal_mult(*coor))
+                
     except Exception as error:
         print(error)
         
     else:
-        print(mult)    
-    
+        maximums = [
+        max(horizontal_mults),
+        max(vertic_mults),
+        max(main_diagonal_mults),
+        max(side_diagonal_mults),]
+        print(max(maximums))
+        
+        
 if __name__ == '__main__':
     main()
     
 
-# side diagonal mult
-# исправить ошибку (если возникнет), которая связана с исключениями в side diagonal (index + nums, когда нужно index - nums)
+# side diagonal mult - копия main diagonal, ОБНОВИТЬ
