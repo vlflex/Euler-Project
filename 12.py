@@ -1,8 +1,8 @@
 def get_triangle_num(n):
-    if(n == 1):
-        return 1
-    else:
-        return n + get_triangle_num(n - 1)
+    num = 0
+    for i in range(1, n + 1):
+        num += i
+    return num
     
 def get_dividers(num):
     for i in range(1, num + 1):
