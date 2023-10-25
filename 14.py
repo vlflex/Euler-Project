@@ -17,3 +17,17 @@ class Kollatc:
     def __len__(self):
         return len(self.get_consistency())
     
+def main():
+    value = 0
+    length = 0
+    for num in range(2, 1_000_000):
+        cosist = Kollatc(num)
+        if(len(cosist) > length):
+            length = len(cosist)
+            value = num
+    else:
+        print(f'Наибольшое число {value} имеет последовательность, длиной: {len(Kollatc(value))}')
+    
+    
+if __name__ == '__main__':
+    main()
