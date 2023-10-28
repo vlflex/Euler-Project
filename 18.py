@@ -31,4 +31,8 @@ class TriangleNum:
             row = list(map(add_zero, row))
             result += f"{' '.join(row):^{max_size}}\n"
         return result
-
+    
+    def get_down_left(self, i, j):
+        shift_left = lambda j: j if (j - 1 >= 0) else 0
+        return self.__value[i+1][shift_left(j-1)]
+    
