@@ -41,7 +41,10 @@ class EngNum:
             self.__str = f"{self.__dict[self[-1]]}teen"
         elif(20 < self.__value < 100):
             self.__str = f"{self.__dict[self[0] * 10]}-{self.__dict[self[-1]]}"
-            
+        elif(100 <= self.__value < 1000):
+            temp_num = EngNum(self[-2] * 10 + self[-1])
+            self.__str = f"{self.__dict[self[0]]} {self.__dict[100]} and {temp_num.__str__()}"
+          
         
     def get_value(self):
         return self.__value
