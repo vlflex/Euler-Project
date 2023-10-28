@@ -39,6 +39,8 @@ class EngNum:
             self.__str = self.__dict[self.__value]
         elif(11 < self.__value < 20):
             self.__str = f"{self.__dict[self[-1]]}teen"
+        elif(20 < self.__value < 100):
+            self.__str = f"{self.__dict[self[0] * 10]}-{self.__dict[self[-1]]}"
             
         
     def get_value(self):
