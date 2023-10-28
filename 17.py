@@ -58,3 +58,15 @@ class EngNum:
     def __len__(self):
         return len(self.__str)
     
+def main():
+    string = ''
+    max_num = 1000
+    for num in range(1, max_num + 1):
+        eng = EngNum(num)
+        string += eng.__str__().replace(' ', '').replace('-', '')
+    print(f"кол-во: {len(string)}")
+   
+    
+    
+if __name__ == '__main__':
+    main()
