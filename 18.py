@@ -36,3 +36,7 @@ class TriangleNum:
         shift_left = lambda j: j if (j - 1 >= 0) else 0
         return self.__value[i+1][shift_left(j-1)]
     
+    def get_down_right(self, i, j):
+        shift_right = lambda j: j if (j + 1 > len(self.__value[i])) else len(self.__value[i]) - 1
+        return self.__value[i+1][shift_right(j+1)]
+
