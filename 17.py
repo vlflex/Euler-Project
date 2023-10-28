@@ -26,7 +26,7 @@ class EngNum:
             80:'eighty',
             90:'ninety',
             100:'hundred',
-            1000:'thousand',
+            1000:'one thousand',
         }
         self.__init_digits()
         self.__init_str_value()
