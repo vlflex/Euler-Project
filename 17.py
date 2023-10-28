@@ -29,6 +29,9 @@ class EngNum:
     def __init_str_value(self):
         if (self.__value in self.__dict.keys()):
             self.__str = self.__dict[self.__value]
+        elif(11 < self.__value < 20):
+            self.__str = f"{self.__dict[self[-1]]}teen"
+            
         
     def get_value(self):
         return self.__value
