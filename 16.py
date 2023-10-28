@@ -12,3 +12,10 @@ class Number:
     
     def __getitem__(self, index):
         return self.__digits[index]
+        
+def main():
+    num = Number(2**1000)
+    print(sum(num[:]))
+    
+if __name__ == '__main__':
+    main()
