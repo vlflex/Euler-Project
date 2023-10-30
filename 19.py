@@ -1,3 +1,4 @@
+from datetime import date, timedelta
 
 def is_leap_year(year):
     if(year % 100 == 0):
@@ -23,3 +24,24 @@ def get_delta(date):
         delta = timedelta(days = 31)
     return delta
 
+
+def main():
+    start = date(1901, 1, 1)
+    end = date(2000, 12, 31)
+    current = start
+    count = 0
+    
+    while(current < end):
+        delta = get_delta(current)
+        print(current, delta, sep = '\t')
+        if(current.weekday() == 6):
+            count += 1
+        current += delta
+    print(count)
+    
+if __name__ == '__main__':
+    main()
+
+
+
+ 
