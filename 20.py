@@ -1,3 +1,5 @@
+from math import factorial
+
 class Number:
     def __init__(self, value):
         self.__value = value
@@ -12,3 +14,10 @@ class Number:
     
     def __getitem__(self, index):
         return self.__digits[index]
+    
+def main():
+    num = Number(factorial(100))
+    print(sum(num[:]))
+    
+if __name__ == '__main__':
+    main()
