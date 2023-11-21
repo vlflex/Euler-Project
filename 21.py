@@ -29,3 +29,21 @@ def is_friend_nums(num1: Num, num2: Num) -> bool:
     else:
         return False
                 
+def main():
+    from datetime import datetime
+    print(f"Start: {datetime.now().strftime('%H:%M:%S')}")
+    MAX_NUM: int = 10_000
+    counter: int = 0
+    for i in range(1, MAX_NUM):
+        for j in range(int(i * 0.6), i):
+            num1: Num = Num(i)
+            num2: Num = Num(j)
+            if(is_friend_nums(num1, num2)):
+                counter += num1.value + num2.value
+                print(counter)
+                
+    print(counter)
+    print(f"End: {datetime.now().strftime('%H:%M:%S')}")
+
+if __name__ == '__main__':
+    main()
