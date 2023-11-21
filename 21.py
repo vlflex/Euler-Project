@@ -22,3 +22,10 @@ class Num:
                     yield self.__value // i
                 previous_i = i
     
+    
+def is_friend_nums(num1: Num, num2: Num) -> bool:
+    if(num1.value == sum(num2.dividers) and num2.value == sum(num1.dividers)):
+        return True
+    else:
+        return False
+                
