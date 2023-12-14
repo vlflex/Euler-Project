@@ -1,3 +1,5 @@
+from tqdm import tqdm
+import time
 class Num:
     def __init__(self, value):
         self.__value: int = value
@@ -51,3 +53,17 @@ class Num:
                 if(Num(num1).is_excess and Num(num2).is_excess):
                     return True
         return False
+    
+def main():
+    NUMBER_BORDER: int = 28123 
+    total_sum: int = 0
+    for num in tqdm(range(1, NUMBER_BORDER + 1), desc = 'main'):
+        if not Num(num).is_excess_sum:
+            total_sum += num
+        time.sleep(0.01)
+        
+    else:
+        print(total_sum)
+
+if __name__ == '__main__':
+    main()
